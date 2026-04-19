@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card">
+    <h2>Edit Item</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        <!-- TITLE -->
+        <input type="text" name="title" value="{{ item[2] }}" required><br><br>
+
+        <!-- DESCRIPTION -->
+        <textarea name="description" rows="3" required>{{ item[3] }}</textarea><br><br>
+
+        <!-- 🔥 CATEGORY -->
+        <label style="color:#555;">Category</label><br>
+        <select name="category" required>
+            <option value="Electronics" {% if item[8]=="Electronics" %}selected{% endif %}>Electronics</option>
+            <option value="Stationary" {% if item[8]=="Stationary" %}selected{% endif %}>Stationary</option>
+            <option value="Wallet" {% if item[8]=="Wallet" %}selected{% endif %}>Wallet</option>
+            <option value="Clothing" {% if item[8]=="Clothing" %}selected{% endif %}>Clothing</option>
+            <option value="Accessories" {% if item[8]=="Accessories" %}selected{% endif %}>Accessories</option>
+            <option value="Others" {% if item[8]=="Others" %}selected{% endif %}>Others</option>
+        </select><br><br>
+
+        <!-- STATUS -->
+        <select name="status">
+            <option value="Lost" {% if item[4]=="Lost" %}selected{% endif %}>Lost</option>
+            <option value="Found" {% if item[4]=="Found" %}selected{% endif %}>Found</option>
+            <option value="Claimed" {% if item[4]=="Claimed" %}selected{% endif %}>Claimed</option>
+            <option value="Returned" {% if item[4]=="Returned" %}selected{% endif %}>Returned</option>
+        </select><br><br>
+
+        <!-- 🔥 CURRENT IMAGE -->
+        {% if item[6] %}
+        <p style="color:#555;">Current Image:</p>
+        <img src="/static/uploads/{{ item[6] }}" width="150"><br><br>
+        {% endif %}
+
+        <!-- 🔥 NEW IMAGE -->
+        <label style="color:#555;">Change Image (optional)</label><br>
+        <input type="file" name="image"><br><br>
+
+        <button type="submit">Update Item</button>
+
+    </form>
+</div>
+
+{% endblock %}

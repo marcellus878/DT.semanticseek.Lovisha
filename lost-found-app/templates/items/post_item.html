@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card">
+    <h2>Post Item</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        <input type="text" name="title" placeholder="Title" required><br><br>
+
+        <input type="text" name="description" placeholder="Description" required><br><br>
+
+        <!-- 🔥 CATEGORY (NEW) -->
+        <select name="category" required>
+            <option value="">Select Category</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Stationary">Stationary</option>
+            <option value="Wallet">Wallet</option>
+            <option value="Clothing">Clothing</option>
+            <option value="Accessories">Accessories</option>
+            <option value="Others">Others</option>
+        </select><br><br>
+
+        <select name="status">
+            <option>Lost</option>
+            <option>Found</option>
+        </select><br><br>
+
+        <input type="file" name="image"><br><br>
+
+        <!-- 🔥 LOCATION BUTTON -->
+        <button type="button" onclick="openMap()">📍 Add Location (Optional)</button><br><br>
+
+        <!-- 🔥 HIDDEN INPUTS -->
+        <input type="hidden" name="latitude" id="lat">
+        <input type="hidden" name="longitude" id="lng">
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<!-- 🔥 POPUP MODAL -->
+<div id="mapModal" class="modal">
+    <div class="modal-content">
+
+        <span class="close" onclick="closeMap()">&times;</span>
+        <h3>Select Location (Rajalakshmi Engineering College)</h3>
+
+        <div id="map"></div>
+
+        <button onclick="closeMap()">Save Location</button>
+
+    </div>
+</div>
+
+<!-- 🔥 LEAFLET -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+    let map;
+    let marker;
+
+    const collegeLat = 13.0825;
+    const collegeLng = 80.0270;
+
+    function openMap() {
+        document.getElementById("mapModal").style.display = "block";
+
+        setTimeout(() => {
+            if (!map) {
+
+                map = L.map('map').setView([collegeLat, collegeLng], 18);
+
+                L.tileLayer(`https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=YOUR_TOKEN`, {
+                    attribution: '© Mapbox © OpenStreetMap'
+                }).addTo(map);
+
+                L.marker([collegeLat, collegeLng])
+                    .addTo(map)
+                    .bindPopup("College")
+                    .openPopup();
+
+                map.on('click', function (e) {
+                    if (marker) map.removeLayer(marker);
+
+                    marker = L.marker(e.latlng).addTo(map);
+
+                    document.getElementById("lat").value = e.latlng.lat;
+                    document.getElementById("lng").value = e.latlng.lng;
+                });
+
+            } else {
+                map.invalidateSize();
+            }
+        }, 200);
+    }
+
+    function closeMap() {
+        document.getElementById("mapModal").style.display = "none";
+    }
+</script>
+
+{% endblock %}

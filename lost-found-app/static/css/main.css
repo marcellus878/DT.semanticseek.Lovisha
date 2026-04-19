@@ -1,0 +1,254 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BODY */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(circle at top, #111, #000);
+    color: #e5e5e5;
+}
+
+/* MAIN */
+.main-content {
+    padding: 50px 20px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+
+    background: #0f0f14;
+    /* 🔥 SOLID FIX */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* LOGO */
+.logo a {
+    font-size: 26px;
+    font-weight: 600;
+    color: #7c8cff;
+    text-decoration: none;
+}
+
+/* NAV LINKS */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    white-space: nowrap;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #ddd;
+    /* 🔥 FIX */
+    font-size: 14px;
+    transition: 0.25s;
+}
+
+.nav-links a:hover {
+    color: #fff;
+}
+
+/* ================= INBOX BADGE ================= */
+.inbox-link {
+    position: relative;
+}
+
+.badge {
+    background: #ff3b3b;
+    color: white;
+    font-size: 11px;
+    border-radius: 50%;
+    padding: 2px 6px;
+    position: absolute;
+    top: -6px;
+    right: -10px;
+}
+
+/* ================= PROFILE ================= */
+.profile-menu {
+    position: relative;
+}
+
+.profile-btn {
+    cursor: pointer;
+    color: #ddd;
+    font-size: 14px;
+}
+
+/* DROPDOWN */
+.dropdown {
+    position: absolute;
+    top: 35px;
+    right: 0;
+
+    background: #151515;
+    /* 🔥 SOLID FIX */
+    border: 1px solid #333;
+    border-radius: 10px;
+
+    display: none;
+    min-width: 120px;
+}
+
+.dropdown a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #eee;
+}
+
+.dropdown a:hover {
+    background: #222;
+}
+
+.profile-menu:hover .dropdown {
+    display: block;
+}
+
+/* ================= CARD ================= */
+.card {
+    background: #141414;
+    /* 🔥 BIG FIX */
+    border-radius: 16px;
+    padding: 20px;
+    margin: 25px 0;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}
+
+/* ================= ITEM ================= */
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.category {
+    font-size: 12px;
+    color: #00e6c3;
+}
+
+/* IMAGE */
+.card img {
+    margin-top: 12px;
+    border-radius: 12px;
+    max-width: 160px;
+}
+
+/* TEXT FIX */
+.card p,
+.card span,
+.card div {
+    color: #ddd;
+}
+
+/* STATUS */
+.status {
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+/* ================= BUTTON ================= */
+button {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* ACTION BUTTONS */
+.item-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-search {
+    background: #00c896;
+}
+
+.btn-edit {
+    background: #4da6ff;
+}
+
+.btn-delete {
+    background: #ff4444;
+}
+
+/* ================= INPUT (FIXED) ================= */
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    background: #1a1a1a;
+    /* 🔥 FIX */
+    color: #ffffff;
+}
+
+/* ================= ALERT (FINAL REAL FIX) ================= */
+.alert-box {
+    background: #0f1f1b;
+    /* 🔥 DARK BASE */
+    border: 1px solid #00ffcc;
+    color: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+/* TEXT INSIDE ALERT */
+.alert-box p,
+.alert-box b,
+.alert-box h3 {
+    color: #ffffff;
+}
+
+/* MATCH COLORS */
+.match.high {
+    color: #00ff88;
+    font-weight: 600;
+}
+
+.match.medium {
+    color: #ffd700;
+    font-weight: 600;
+}
+
+.match.low {
+    color: #ff6666;
+    font-weight: 600;
+}

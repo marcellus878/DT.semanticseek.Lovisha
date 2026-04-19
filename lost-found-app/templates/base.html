@@ -1,0 +1,42 @@
+<nav class="navbar">
+
+    <h1 class="logo">
+        <a href="/explore">SemanticSeek</a>
+    </h1>
+
+    <div class="nav-links">
+
+        {% if session.get('username') %}
+
+        <a href="/explore">All Items</a>
+        <a href="/dashboard">My Items</a>
+        <a href="/post">Post Item</a>
+
+        <a href="/inbox" class="inbox-link">
+            Inbox
+            {% if msg_count and msg_count > 0 %}
+            <span class="badge">{{ msg_count }}</span>
+            {% endif %}
+        </a>
+
+        <!-- 👤 PROFILE -->
+        <div class="profile-menu">
+            <div class="profile-btn">
+                {{ session["name"] }}
+            </div>
+
+            <div class="dropdown">
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+
+        {% else %}
+
+        <a href="/login">Sign In</a>
+        <a href="/register">Sign Up</a>
+
+        {% endif %}
+
+    </div>
+
+</nav>

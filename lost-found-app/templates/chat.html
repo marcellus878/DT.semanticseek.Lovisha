@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="chat-wrapper">
+
+    <div class="chat-container">
+
+        <!-- HEADER -->
+        <div class="chat-header">
+            💬 Chat with {{ other_user }}
+        </div>
+
+        <!-- MESSAGES -->
+        <div class="chat-box" id="chatBox">
+
+            {% if messages %}
+            {% for msg in messages %}
+
+            <div class="message {% if msg[0] == session['username'] %}sent{% else %}received{% endif %}">
+
+                {% if msg[0] != session["username"] %}
+                <div class="sender">{{ msg[0] }}</div>
+                {% endif %}
+
+                <div class="text">{{ msg[2] }}</div>
+                <div class="time">{{ msg[3] }}</div>
+
+            </div>
+
+            {% endfor %}
+            {% else %}
+            <p class="no-msg">No messages yet</p>
+            {% endif %}
+
+        </div>
+
+        <!-- INPUT -->
+        <form method="POST" class="chat-input">
+            <input type="text" name="message" placeholder="Type a message..." required>
+            <button type="submit">Send</button>
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+    var chatBox = document.getElementById("chatBox");
+    chatBox.scrollTop = chatBox.scrollHeight;
+</script>
+
+{% endblock %}

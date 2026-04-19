@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <h2 style="color:white;">🔍 Smart Search Results</h2>
+
+    {% if matches %}
+
+    {% for item, score, explanation, username in matches %}
+    <div class="card"
+        style="margin-bottom: 20px; padding: 15px; border-radius: 10px; background: #1e1e1e; color: white;">
+
+        <h3>{{ item[2] }}</h3>
+        
+        <p style="color:#00ffcc;">
+            Category: {{ item[8] if item|length > 8 else "N/A" }}
+        </p>
+
+        <p>{{ item[3] }}</p>
+
+        <p><strong>Status:</strong> {{ item[4] }}</p>
+        <p><strong>Posted:</strong> {{ item[5] }}</p>
+
+        {% if item[6] %}
+        <img src="{{ url_for('static', filename='uploads/' + item[6]) }}" style="width: 200px; border-radius: 10px;">
+        {% endif %}
+
+        <hr>
+
+        {% set score_val = score %}
+
+        {% if score_val >= 80 %}
+        {% set cls = "high" %}
+        {% set label = "HIGH MATCH" %}
+        {% elif score_val >= 60 %}
+        {% set cls = "medium" %}
+        {% set label = "MEDIUM MATCH" %}
+        {% else %}
+        {% set cls = "low" %}
+        {% set label = "LOW MATCH" %}
+        {% endif %}
+
+        <!-- 🔥 MATCH BADGE -->
+        <p class="match {{ cls }}">
+            {{ label }} — {{ score_val }}%
+        </p>
+
+        <!-- 💡 EXPLANATION -->
+        <p class="explanation">
+            💡 {{ explanation }}
+        </p>
+
+        <!-- 💬 CHAT BUTTON -->
+        {% if session["username"] != username %}
+        <a href="/chat/{{ username }}/{{ item[0] }}">
+            <button style="margin-top:10px;">
+                💬 Chat with Owner
+            </button>
+        </a>
+        {% endif %}
+
+    </div>
+    {% endfor %}
+
+    {% else %}
+    <p style="color:white;">No similar items found.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

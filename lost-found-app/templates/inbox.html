@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 style="color:white;">💬 Inbox</h2>
+
+<div class="inbox-container">
+
+    {% if chats %}
+
+    {% for chat in chats %}
+
+    {% set sender = chat[1] %}
+    {% set receiver = chat[2] %}
+    {% set item_id = chat[3] %}
+    {% set message = chat[4] %}
+    {% set time = chat[5] %}
+
+    {% if sender == session["username"] %}
+    {% set other = receiver %}
+    {% else %}
+    {% set other = sender %}
+    {% endif %}
+
+    <a href="/chat/{{ other }}/{{ item_id }}" class="chat-card">
+
+        <div class="chat-info">
+            <div class="chat-name">
+                {{ user_map.get(other, other) }}
+            </div>
+
+            <div class="chat-message">
+                {{ message }}
+            </div>
+        </div>
+
+        <div class="chat-time">
+            {{ time }}
+        </div>
+
+    </a>
+
+    {% endfor %}
+
+    {% else %}
+    <p style="color:#aaa;">No conversations yet</p>
+    {% endif %}
+
+</div>
+
+{% endblock %}
